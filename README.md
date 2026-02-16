@@ -13,4 +13,11 @@ The React Compiler is not enabled on this template because of its impact on dev 
 
 ## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Troubleshooting
+
+### 502 Bad Gateway / Network Error
+If you encounter an `AxiosError: Network Error` combined with a `502 Bad Gateway` in the browser console, it indicates the backend service on Railway is currently down or failing to respond. Check the Railway dashboard for the `industrious-friendship` project logs.
+
+### CSP Violation
+If you see a Content Security Policy violation related to `content.js` or `marvelous-creation-production.up.railway.app`, it is likely caused by a browser extension (e.g., password managers, ad blockers) injecting scripts. Try running the app in an **Incognito** window to confirm.
+
