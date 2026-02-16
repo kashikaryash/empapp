@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import EmployeeList from './components/EmployeeList';
 
 function App() {
+  const [isConnected, setIsConnected] = useState(false);
+
+  useEffect(() => {
+    const checkStatus = async () => {
+      try {
+        const response = await fetch('https://industrious-friendship-production.up.railway.app/');
+        setIsConnected(response.ok);
+      } catch {
+        setIsConnected(false);
+      }
+    };
+    checkStatus();
+    const interval = setInterval(checkStatus, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="container">
       <header style={{ marginBottom: '4rem', textAlign: 'center' }}>
@@ -22,7 +38,9 @@ function App() {
             fontSize: '0.9rem',
             color: 'var(--text-secondary)'
           }}>
-            Status: <span style={{ color: '#10b981', fontWeight: 600 }}>Connected</span>
+            Status: <span style={{ color: isConnected ? '#10b981' : '#ef4444', fontWeight: 600 }}>
+              {isConnected ? 'Connected' : 'Offline'}
+            </span>
           </div>
         </div>
 
