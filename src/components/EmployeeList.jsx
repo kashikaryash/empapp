@@ -11,8 +11,12 @@ const EmployeeList = () => {
         const fetchEmployees = async () => {
             try {
                 const data = await getAllEmployees();
-                // Since the user request shows Employee Controller returning List<Employee>
-                setEmployees(data);
+                if (Array.isArray(data)) {
+                    setEmployees(data);
+                } else {
+                    console.error('Invalid data format received:', data);
+                    setError('Received invalid data from the server. Please contact support.');
+                }
             } catch (err) {
                 setError('Failed to load employee records. Please try again later.');
             } finally {
