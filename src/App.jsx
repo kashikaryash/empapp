@@ -7,14 +7,14 @@ function App() {
   useEffect(() => {
     const checkStatus = async () => {
       try {
-        const response = await fetch('https://industrious-friendship-production.up.railway.app/');
+        const response = await fetch('https://industrious-friendship-production.up.railway.app/health');
         setIsConnected(response.ok);
       } catch {
         setIsConnected(false);
       }
     };
     checkStatus();
-    const interval = setInterval(checkStatus, 30000);
+    const interval = setInterval(checkStatus, 10000);
     return () => clearInterval(interval);
   }, []);
 
