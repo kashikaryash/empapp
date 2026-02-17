@@ -19,4 +19,14 @@ export const getAllEmployees = async () => {
   }
 };
 
+export const checkHealth = async () => {
+  try {
+    const response = await api.get('/api/health');
+    return response.status === 200;
+  } catch (error) {
+    console.error('Health check failed:', error);
+    return false;
+  }
+};
+
 export default api;

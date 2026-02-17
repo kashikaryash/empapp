@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import EmployeeList from './components/EmployeeList';
+import { checkHealth } from './services/api';
 
 function App() {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     const checkStatus = async () => {
-      try {
-        const response = await fetch('https://industrious-friendship-production.up.railway.app/health');
-        setIsConnected(response.ok);
-      } catch {
-        setIsConnected(false);
-      }
+      const healthy = await checkHealth();
+      setIsConnected(healthy);
     };
     checkStatus();
     const interval = setInterval(checkStatus, 10000);
